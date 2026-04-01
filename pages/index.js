@@ -147,7 +147,7 @@ export default function Home() {
             src="https://res.cloudinary.com/dekamm1rd/image/upload/v1775078317/EverCalm-5_adlnww.png"
             alt="Evercalm"
             style={{
-              height: '120px',
+              height: '280px',
               marginBottom: '1rem',
             }}
           />
@@ -182,7 +182,7 @@ export default function Home() {
               onClick={() => handleScenerySelect(scenery.id)}
               style={{
                 padding: '2rem 1.5rem',
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'rgba(0, 0, 0, 0.5)',
                 border: '1px solid rgba(212, 175, 55, 0.3)',
                 borderRadius: '8px',
                 cursor: 'pointer',
@@ -194,13 +194,13 @@ export default function Home() {
                 textTransform: 'uppercase',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
                 e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
                 e.currentTarget.style.boxShadow =
                   '0 0 20px rgba(212, 175, 55, 0.2)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                e.currentTarget.style.background = 'rgba(0, 0, 0, 0.5)';
                 e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
@@ -220,7 +220,10 @@ export default function Home() {
       <div
         style={{
           minHeight: '100vh',
-          background: 'linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a1f3d 100%)',
+          backgroundImage: 'url(https://res.cloudinary.com/dekamm1rd/image/upload/v1775078088/Untitled_design_2_o6nmxg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: '#0f1419',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
