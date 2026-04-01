@@ -22,7 +22,7 @@ export default function Home() {
     {
       id: 'fireplace',
       name: 'Fireplace',
-      videoUrl: 'https://res.cloudinary.com/dekamm1rd/video/upload/v1775071900/FireplaceTest_r92s3l.mov',
+      videoUrl: 'https://res.cloudinary.com/dekamm1rd/video/upload/v1775071900/FireplaceTest_r92s3l.mov?dl=1',
       ambientSoundsUrl: 'https://placeholder-audio.example.com/fireplace-crackle.mp3',
       meditationMusicUrl: 'https://placeholder-audio.example.com/meditation-music.mp3',
     },
