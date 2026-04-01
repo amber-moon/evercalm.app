@@ -127,7 +127,10 @@ export default function Home() {
       <div
         style={{
           minHeight: '100vh',
-          background: 'linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a1f3d 100%)',
+          backgroundImage: 'url(https://res.cloudinary.com/dekamm1rd/image/upload/v1775078088/Untitled_design_2_o6nmxg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: '#0f1419',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -140,18 +143,14 @@ export default function Home() {
       >
         {/* Logo */}
         <div style={{ marginBottom: '3rem', marginTop: '1rem', textAlign: 'center' }}>
-          <h1
+          <img
+            src="https://res.cloudinary.com/dekamm1rd/image/upload/v1775078317/EverCalm-5_adlnww.png"
+            alt="Evercalm"
             style={{
-              fontSize: '2.5rem',
-              fontWeight: 300,
-              letterSpacing: '2px',
-              margin: 0,
-              color: '#d4af37',
-              textTransform: 'uppercase',
+              height: '120px',
+              marginBottom: '1rem',
             }}
-          >
-            Evercalm
-          </h1>
+          />
           <p
             style={{
               fontSize: '0.85rem',
@@ -173,6 +172,8 @@ export default function Home() {
             gap: '1.5rem',
             maxWidth: '900px',
             width: '100%',
+            marginTop: 'auto',
+            marginBottom: 'auto',
           }}
         >
           {sceneries.map((scenery) => (
