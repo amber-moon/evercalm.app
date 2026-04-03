@@ -148,19 +148,32 @@ export default function Home() {
             alt="Evercalm"
             style={{
               height: '360px',
-              marginBottom: '1rem',
+              marginBottom: '2rem',
             }}
           />
           <p
             style={{
               fontSize: '0.85rem',
               letterSpacing: '1px',
-              color: '#9b92b8',
+              color: '#e8e6f0',
               marginTop: '0.5rem',
+              marginBottom: '3rem',
               textTransform: 'uppercase',
             }}
           >
             Find your sanctuary
+          </p>
+
+          <p
+            style={{
+              fontSize: '1.2rem',
+              letterSpacing: '1px',
+              color: '#e8e6f0',
+              marginBottom: '2rem',
+              textTransform: 'uppercase',
+            }}
+          >
+            Choose your scenery
           </p>
         </div>
 
