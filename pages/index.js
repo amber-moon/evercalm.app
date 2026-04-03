@@ -144,10 +144,10 @@ export default function Home() {
         {/* Logo */}
         <div style={{ marginBottom: '3rem', marginTop: '1rem', textAlign: 'center' }}>
           <img
-            src="https://res.cloudinary.com/dekamm1rd/image/upload/v1775078317/EverCalm-5_adlnww.png"
+            src="/Transparent_Logo_Light_Text.png"
             alt="Evercalm"
             style={{
-              height: '280px',
+              height: '360px',
               marginBottom: '1rem',
             }}
           />
