@@ -127,7 +127,7 @@ export default function Home() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundImage: 'url(https://res.cloudinary.com/dekamm1rd/image/upload/v1775078088/Untitled_design_2_o6nmxg.png)',
+          backgroundImage: 'url(/Background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: '#0f1419',
@@ -220,7 +220,7 @@ export default function Home() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundImage: 'url(https://res.cloudinary.com/dekamm1rd/image/upload/v1775078088/Untitled_design_2_o6nmxg.png)',
+          backgroundImage: 'url(/Background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: '#0f1419',
