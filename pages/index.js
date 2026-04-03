@@ -156,9 +156,10 @@ export default function Home() {
               fontSize: '0.85rem',
               letterSpacing: '1px',
               color: '#e8e6f0',
-              marginTop: '0.5rem',
+              marginTop: '0.2rem',
               marginBottom: '3rem',
               textTransform: 'uppercase',
+              fontStyle: 'italic',
             }}
           >
             Find your sanctuary
@@ -169,7 +170,7 @@ export default function Home() {
               fontSize: '1.2rem',
               letterSpacing: '1px',
               color: '#e8e6f0',
-              marginBottom: '2rem',
+              marginBottom: '0.5rem',
               textTransform: 'uppercase',
             }}
           >
