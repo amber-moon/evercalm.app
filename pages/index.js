@@ -176,7 +176,7 @@ export default function Home() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundImage: 'url(/background.png)',
+          backgroundImage: 'url(/Background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: '#0a0a0a',
@@ -192,7 +192,7 @@ export default function Home() {
       >
         {/* Logo */}
         <img
-          src="/evercalm-logo.png"
+          src="/Transparent_Logo_Light_Text.png"
           alt="Evercalm"
           style={{
             height: '200px',
@@ -389,38 +389,36 @@ export default function Home() {
             backdropFilter: 'blur(4px)',
           }}
         >
-          {
-            <p
-              style={{
-                fontSize: '0.9rem',
-                letterSpacing: '1px',
-                color: '#d4af37',
-                marginBottom: '2rem',
-                textTransform: 'uppercase',
-                textAlign: 'center',
-                fontWeight: 500,
-              }}
-            >
-              What do you seek?
-            </p>}
-
-            {/* Step 1: Session Selected (Show confirmation) */}
-            {flowStep === 1 && (
-              <div style={{ textAlign: 'center' }}>
-                <h2
-                  style={{
-                    fontSize: '1.5rem',
-                    fontWeight: 300,
-                    letterSpacing: '1px',
-                    marginBottom: '1rem',
-                    color: '#d4af37',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {sessionTypes.find((s) => s.id === selectedSession)?.title}
-                </h2>
-              </div>
-            )}
+          <h2
+            style={{
+              fontSize: '1.2rem',
+              fontWeight: 400,
+              letterSpacing: '1px',
+              marginBottom: '2rem',
+              color: '#d4af37',
+              textTransform: 'uppercase',
+            }}
+          >
+            What do you seek?
+          </h2>
+          
+          {/* Step 1: Session Selected (Show confirmation) */}
+          {flowStep === 1 && (
+            <div style={{ textAlign: 'center' }}>
+              <h3
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: 300,
+                  letterSpacing: '1px',
+                  marginBottom: '1rem',
+                  color: '#d4af37',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {sessionTypes.find((s) => s.id === selectedSession)?.title}
+              </h3>
+            </div>
+          )}
 
             {/* Step 2: Audio Mode Selection (Meditation only) */}
             {flowStep === 2 && selectedSession === 'meditation' && (
