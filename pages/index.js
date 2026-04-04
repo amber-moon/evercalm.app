@@ -188,10 +188,10 @@ export default function Home() {
       >
         {/* Logo */}
         <img
-          src="/LogoTransparent.jpg"
+          src="/LogoTransparent.png"
           alt="Evercalm"
           style={{
-            height: '360px',
+            height: '280px',
             marginBottom: '2rem',
           }}
         />
