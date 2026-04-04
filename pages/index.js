@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 export default function Home() {
-  const [screen, setScreen] = useState('home'); // 'home', 'session-select', 'immersion'
+  const [screen, setScreen] = useState('home'); // 'home', 'immersion'
   const [selectedSession, setSelectedSession] = useState(null); // 'affirmations', 'meditation', 'prompts'
   const [selectedAudioMode, setSelectedAudioMode] = useState(null); // 'guided', 'self-paced' (meditation only)
   const [selectedScenery, setSelectedScenery] = useState(null); // 'fireplace', 'forest'
@@ -36,19 +36,16 @@ export default function Home() {
       id: 'affirmations',
       title: 'Building self-compassion',
       description: 'Confidence building affirmations',
-      shortDesc: 'Boost your inner strength with guided affirmations',
     },
     {
       id: 'meditation',
       title: 'Regulate your nervous system',
       description: 'Guided or self-paced meditation and breath work',
-      shortDesc: 'Calm your mind and body with meditation',
     },
     {
       id: 'prompts',
       title: 'Explore your inner world',
       description: 'Reflective and creative prompts for mind-wandering',
-      shortDesc: 'Activate your default mode network',
     },
   ];
 
@@ -170,8 +167,8 @@ export default function Home() {
     }
   }, [screen, selectedSession, selectedAudioMode, selectedScenery, isPlaying]);
 
-  // Home Screen
-  if (screen === 'home') {
+  // HOME SCREEN - Only show if no session selected
+  if (screen === 'home' && !selectedSession) {
     return (
       <div
         style={{
@@ -187,15 +184,14 @@ export default function Home() {
           padding: '2rem 1rem',
           fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
           color: '#e8e6f0',
-          overflow: 'hidden',
         }}
       >
         {/* Logo */}
         <img
-          src="/Transparent_Logo_Light_Text.png"
+          src="/LogoTransparent.jpg"
           alt="Evercalm"
           style={{
-            height: '200px',
+            height: '360px',
             marginBottom: '2rem',
           }}
         />
@@ -248,6 +244,19 @@ export default function Home() {
             maxWidth: '900px',
           }}
         >
+          <p
+            style={{
+              fontSize: '0.9rem',
+              letterSpacing: '1px',
+              color: '#d4af37',
+              marginBottom: '2rem',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              fontWeight: 500,
+            }}
+          >
+            What do you seek?
+          </p>
 
           <div
             style={{
@@ -313,23 +322,13 @@ export default function Home() {
     );
   }
 
-  // Selection Flow Screen (Session → Audio Mode → Scenery)
+  // SELECTION FLOW SCREEN - Shows after session is selected
   if (screen === 'home' && selectedSession) {
-    return null; // Handled below
-  }
-
-  // Dynamic Selection Flow (Replaces home screen after session select)
-  if (screen === 'home' && selectedSession) {
-    // This will be rendered as overlay, see below
-  }
-
-  // Render selection flow as modal overlay on home screen
-  if (selectedSession && screen === 'home') {
     return (
       <div
         style={{
           minHeight: '100vh',
-          backgroundImage: 'url(/background.png)',
+          backgroundImage: 'url(/Background.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: '#0a0a0a',
@@ -340,7 +339,6 @@ export default function Home() {
           padding: '2rem 1rem',
           fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
           color: '#e8e6f0',
-          overflow: 'hidden',
         }}
       >
         {/* Back Button */}
@@ -372,7 +370,7 @@ export default function Home() {
           ← Back
         </button>
 
-        {/* Flow Content - Fades in/out */}
+        {/* Main Selection Box */}
         <div
           style={{
             opacity: fadeIn ? 1 : 0,
@@ -389,6 +387,7 @@ export default function Home() {
             backdropFilter: 'blur(4px)',
           }}
         >
+          {/* "What do you seek?" - Always visible */}
           <h2
             style={{
               fontSize: '1.2rem',
@@ -401,148 +400,189 @@ export default function Home() {
           >
             What do you seek?
           </h2>
-          
-          {/* Step 1: Session Selected (Show confirmation) */}
+
+          {/* Step 1: Show selected session */}
           {flowStep === 1 && (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', width: '100%' }}>
               <h3
                 style={{
                   fontSize: '1rem',
-                  fontWeight: 300,
+                  fontWeight: 400,
                   letterSpacing: '1px',
                   marginBottom: '1rem',
-                  color: '#d4af37',
-                  textTransform: 'uppercase',
+                  color: '#e8e6f0',
                 }}
               >
                 {sessionTypes.find((s) => s.id === selectedSession)?.title}
               </h3>
+              <p
+                style={{
+                  fontSize: '0.85rem',
+                  color: '#d0d0d0',
+                  marginBottom: '2rem',
+                }}
+              >
+                {sessionTypes.find((s) => s.id === selectedSession)?.description}
+              </p>
             </div>
           )}
 
-            {/* Step 2: Audio Mode Selection (Meditation only) */}
-            {flowStep === 2 && selectedSession === 'meditation' && (
-              <div style={{ width: '100%', textAlign: 'center' }}>
-                <h2
-                  style={{
-                    fontSize: '1.3rem',
-                    fontWeight: 400,
-                    letterSpacing: '1px',
-                    marginBottom: '2rem',
-                    color: '#d4af37',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Session type
-                </h2>
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    justifyContent: 'center',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {['guided', 'self-paced'].map((mode) => (
-                    <button
-                      key={mode}
-                      onClick={() => handleAudioModeSelect(mode)}
-                      style={{
-                        flex: '1 1 150px',
-                        padding: '1.2rem 1rem',
-                        background: 'rgba(0, 0, 0, 0.5)',
-                        border: '1px solid rgba(212, 175, 55, 0.3)',
-                        borderRadius: '6px',
-                        color: '#e8e6f0',
-                        fontSize: '0.9rem',
-                        fontWeight: 400,
-                        letterSpacing: '0.5px',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        textTransform: 'uppercase',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
-                        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
-                        e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 0, 0, 0.5)';
-                        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      {mode === 'guided' ? 'Guided' : 'Self-paced'}
-                    </button>
-                  ))}
-                </div>
+          {/* Step 2: Audio Mode Selection (Meditation only) */}
+          {flowStep === 2 && selectedSession === 'meditation' && (
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <h3
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: 400,
+                  letterSpacing: '1px',
+                  marginBottom: '2rem',
+                  color: '#e8e6f0',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Session type
+              </h3>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '1rem',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {['guided', 'self-paced'].map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => handleAudioModeSelect(mode)}
+                    style={{
+                      flex: '1 1 150px',
+                      padding: '1.2rem 1rem',
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      border: '1px solid rgba(212, 175, 55, 0.3)',
+                      borderRadius: '6px',
+                      color: '#e8e6f0',
+                      fontSize: '0.9rem',
+                      fontWeight: 400,
+                      letterSpacing: '0.5px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      textTransform: 'uppercase',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)';
+                      e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
+                      e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.4)';
+                      e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    {mode === 'guided' ? 'Guided' : 'Self-paced'}
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Step 3: Scenery Selection */}
-            {flowStep === 3 && (
-              <div style={{ width: '100%', textAlign: 'center' }}>
-                <h2
-                  style={{
-                    fontSize: '1.3rem',
-                    fontWeight: 400,
-                    letterSpacing: '1px',
-                    marginBottom: '2rem',
-                    color: '#d4af37',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Choose your scenery
-                </h2>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '1.5rem',
-                    width: '100%',
-                    marginBottom: '2rem',
-                  }}
-                >
-                  {sceneries.map((scenery) => (
-                    <button
-                      key={scenery.id}
-                      onClick={() => handleScenerySelect(scenery.id)}
-                      style={{
-                        padding: '2rem 1.5rem',
-                        background: 'rgba(0, 0, 0, 0.5)',
-                        border: '1px solid rgba(212, 175, 55, 0.3)',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        color: '#e8e6f0',
-                        fontSize: '1rem',
-                        fontWeight: 400,
-                        letterSpacing: '1px',
-                        transition: 'all 0.3s ease',
-                        textTransform: 'uppercase',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
-                        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
-                        e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 0, 0, 0.5)';
-                        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      {scenery.name}
-                    </button>
-                  ))}
-                </div>
+          {/* Step 3: Scenery Selection */}
+          {flowStep === 3 && (
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <h3
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: 400,
+                  letterSpacing: '1px',
+                  marginBottom: '2rem',
+                  color: '#e8e6f0',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Choose your scenery
+              </h3>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: '1.5rem',
+                  width: '100%',
+                  marginBottom: '2rem',
+                }}
+              >
+                {sceneries.map((scenery) => (
+                  <button
+                    key={scenery.id}
+                    onClick={() => handleScenerySelect(scenery.id)}
+                    style={{
+                      padding: '2rem 1.5rem',
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      border: '1px solid rgba(212, 175, 55, 0.3)',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      color: '#e8e6f0',
+                      fontSize: '1rem',
+                      fontWeight: 400,
+                      letterSpacing: '1px',
+                      transition: 'all 0.3s ease',
+                      textTransform: 'uppercase',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)';
+                      e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
+                      e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.4)';
+                      e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    {scenery.name}
+                  </button>
+                ))}
               </div>
-            )}
-          </div>
+              {/* Start Button */}
+              <button
+                onClick={() => selectedScenery ? null : alert('Please select a scenery')}
+                disabled={!selectedScenery}
+                style={{
+                  padding: '1rem 2rem',
+                  background: selectedScenery ? 'rgba(212, 175, 55, 0.3)' : 'rgba(212, 175, 55, 0.1)',
+                  border: '1px solid rgba(212, 175, 55, 0.5)',
+                  borderRadius: '6px',
+                  color: '#d4af37',
+                  fontSize: '0.95rem',
+                  fontWeight: 500,
+                  letterSpacing: '1px',
+                  cursor: selectedScenery ? 'pointer' : 'not-allowed',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase',
+                  opacity: selectedScenery ? 1 : 0.5,
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedScenery) {
+                    e.currentTarget.style.background = 'rgba(212, 175, 55, 0.5)';
+                    e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.3)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedScenery) {
+                    e.currentTarget.style.background = 'rgba(212, 175, 55, 0.3)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                Start
+              </button>
+            </div>
+          )}
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-  // Immersion Screen
+  // IMMERSION SCREEN
   if (screen === 'immersion') {
     return (
       <div
@@ -630,7 +670,7 @@ export default function Home() {
             style={{
               margin: '0.3rem 0 0 0',
               fontSize: '0.8rem',
-              color: '#d0d0d0',
+              color: '#9b92b8',
             }}
           >
             {sessionTypes.find((s) => s.id === selectedSession)?.title}
